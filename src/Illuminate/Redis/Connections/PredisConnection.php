@@ -33,7 +33,7 @@ class PredisConnection extends Connection implements ConnectionContract
     {
         $loop = $this->pubSubLoop();
 
-        call_user_func_array([$loop, $method], (array) $channels);
+        \Swoole\Coroutine::call_user_func_array([$loop, $method], (array) $channels);
 
         foreach ($loop as $message) {
             if ($message->kind === 'message' || $message->kind === 'pmessage') {

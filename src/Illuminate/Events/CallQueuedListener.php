@@ -82,7 +82,7 @@ class CallQueuedListener implements ShouldQueue
             $this->job, $container->make($this->class)
         );
 
-        call_user_func_array(
+        \Swoole\Coroutine::call_user_func_array(
             [$handler, $this->method], $this->data
         );
     }
@@ -120,7 +120,7 @@ class CallQueuedListener implements ShouldQueue
         $parameters = array_merge($this->data, [$e]);
 
         if (method_exists($handler, 'failed')) {
-            call_user_func_array([$handler, 'failed'], $parameters);
+            \Swoole\Coroutine::call_user_func_array([$handler, 'failed'], $parameters);
         }
     }
 

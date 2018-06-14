@@ -175,7 +175,7 @@ class RedisTaggedCache extends TaggedCache
 
         if (count($values) > 0) {
             foreach (array_chunk($values, 1000) as $valuesChunk) {
-                call_user_func_array([$this->store->connection(), 'del'], $valuesChunk);
+                \Swoole\Coroutine::call_user_func_array([$this->store->connection(), 'del'], $valuesChunk);
             }
         }
     }

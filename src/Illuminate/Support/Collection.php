@@ -295,7 +295,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      */
     public function dd(...$args)
     {
-        call_user_func_array([$this, 'dump'], $args);
+        \Swoole\Coroutine::call_user_func_array([$this, 'dump'], $args);
 
         die(1);
     }

@@ -375,7 +375,7 @@ class Dispatcher implements DispatcherContract
                 return call_user_func($this->createClassCallable($listener), $event, $payload);
             }
 
-            return call_user_func_array(
+            return \Swoole\Coroutine::call_user_func_array(
                 $this->createClassCallable($listener), $payload
             );
         };

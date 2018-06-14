@@ -243,7 +243,7 @@ class Validator implements ValidatorContract
     public function after($callback)
     {
         $this->after[] = function () use ($callback) {
-            return call_user_func_array($callback, [$this]);
+            return \Swoole\Coroutine::call_user_func_array($callback, [$this]);
         };
 
         return $this;
@@ -1106,7 +1106,7 @@ class Validator implements ValidatorContract
         $callback = $this->extensions[$rule];
 
         if (is_callable($callback)) {
-            return call_user_func_array($callback, $parameters);
+            return \Swoole\Coroutine::call_user_func_array($callback, $parameters);
         } elseif (is_string($callback)) {
             return $this->callClassBasedExtension($callback, $parameters);
         }
@@ -1123,7 +1123,7 @@ class Validator implements ValidatorContract
     {
         list($class, $method) = Str::parseCallback($callback, 'validate');
 
-        return call_user_func_array([$this->container->make($class), $method], $parameters);
+        return \Swoole\Coroutine::call_user_func_array([$this->container->make($class), $method], $parameters);
     }
 
     /**

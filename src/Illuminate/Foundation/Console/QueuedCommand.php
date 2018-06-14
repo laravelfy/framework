@@ -37,6 +37,6 @@ class QueuedCommand implements ShouldQueue
      */
     public function handle(KernelContract $kernel)
     {
-        call_user_func_array([$kernel, 'call'], $this->data);
+        \Swoole\Coroutine::call_user_func_array([$kernel, 'call'], $this->data);
     }
 }

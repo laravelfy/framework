@@ -358,7 +358,7 @@ trait FormatsMessages
         $callback = $this->replacers[$rule];
 
         if ($callback instanceof Closure) {
-            return call_user_func_array($callback, func_get_args());
+            return \Swoole\Coroutine::call_user_func_array($callback, func_get_args());
         } elseif (is_string($callback)) {
             return $this->callClassBasedReplacer($callback, $message, $attribute, $rule, $parameters, $validator);
         }
@@ -379,6 +379,6 @@ trait FormatsMessages
     {
         list($class, $method) = Str::parseCallback($callback, 'replace');
 
-        return call_user_func_array([$this->container->make($class), $method], array_slice(func_get_args(), 1));
+        return \Swoole\Coroutine::call_user_func_array([$this->container->make($class), $method], array_slice(func_get_args(), 1));
     }
 }

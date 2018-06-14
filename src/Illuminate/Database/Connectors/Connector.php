@@ -2,7 +2,7 @@
 
 namespace Illuminate\Database\Connectors;
 
-use PDO;
+use Kuaiapp\Db\Pdo\PDO;
 use Exception;
 use Throwable;
 use Doctrine\DBAL\Driver\PDOConnection;

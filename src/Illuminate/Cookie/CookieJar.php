@@ -134,7 +134,7 @@ class CookieJar implements JarContract
         if (head($parameters) instanceof Cookie) {
             $cookie = head($parameters);
         } else {
-            $cookie = call_user_func_array([$this, 'make'], $parameters);
+            $cookie = \Swoole\Coroutine::call_user_func_array([$this, 'make'], $parameters);
         }
 
         $this->queued[$cookie->getName()] = $cookie;

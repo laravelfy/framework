@@ -78,10 +78,10 @@ trait Macroable
         }
 
         if (static::$macros[$method] instanceof Closure) {
-            return call_user_func_array(Closure::bind(static::$macros[$method], null, static::class), $parameters);
+            return \Swoole\Coroutine::call_user_func_array(Closure::bind(static::$macros[$method], null, static::class), $parameters);
         }
 
-        return call_user_func_array(static::$macros[$method], $parameters);
+        return \Swoole\Coroutine::call_user_func_array(static::$macros[$method], $parameters);
     }
 
     /**
@@ -104,9 +104,9 @@ trait Macroable
         $macro = static::$macros[$method];
 
         if ($macro instanceof Closure) {
-            return call_user_func_array($macro->bindTo($this, static::class), $parameters);
+            return \Swoole\Coroutine::call_user_func_array($macro->bindTo($this, static::class), $parameters);
         }
 
-        return call_user_func_array($macro, $parameters);
+        return \Swoole\Coroutine::call_user_func_array($macro, $parameters);
     }
 }

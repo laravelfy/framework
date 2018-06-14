@@ -323,6 +323,6 @@ class Message
     {
         $callable = [$this->swift, $method];
 
-        return call_user_func_array($callable, $parameters);
+        return \Swoole\Coroutine::call_user_func_array($callable, $parameters);
     }
 }

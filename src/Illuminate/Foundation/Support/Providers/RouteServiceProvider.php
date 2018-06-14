@@ -94,7 +94,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function __call($method, $parameters)
     {
-        return call_user_func_array(
+        return \Swoole\Coroutine::call_user_func_array(
             [$this->app->make(Router::class), $method], $parameters
         );
     }
